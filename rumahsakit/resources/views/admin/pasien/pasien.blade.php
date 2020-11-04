@@ -15,7 +15,7 @@
                             <thead>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Spesialis</th>
+                                <th>Alamat</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>

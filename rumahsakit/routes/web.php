@@ -4,6 +4,7 @@ use App\Http\Controllers\Dokter;
 use App\Http\Controllers\Pasien;
 use App\Http\Controllers\Pendaftaran;
 use App\Http\Controllers\Poli;
+use App\Http\Controllers\Rekammedis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,6 @@ Route::get('/admin/poli/{poli}', [Poli::class, 'edit']);
 
 Route::get('/admin/pendaftaran', [Pendaftaran::class, 'index']);
 Route::get('/admin/pendaftaran/{pendaftaran}', [Pendaftaran::class, 'edit']);
+
+Route::get('/admin/rekammedis', [Rekammedis::class, 'index']);
+Route::get('/admin/rekammedis/{rekammedis}', [Rekammedis::class, 'edit']);

@@ -48,20 +48,26 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/admin/pasien') }}">
-                            <i class="nc-icon nc-notes"></i>
+                            <i class="nc-icon nc-circle-09"></i>
                             <p>Pasien</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/admin/poli') }}">
-                            <i class="nc-icon nc-paper-2"></i>
+                            <i class="nc-icon nc-tag-content"></i>
                             <p>Poli</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/admin/pendaftaran') }}">
-                            <i class="nc-icon nc-atom"></i>
+                            <i class="nc-icon nc-paper-2"></i>
                             <p>Pendaftaran</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ url('/admin/rekammedis') }}">
+                            <i class="nc-icon nc-single-copy-04"></i>
+                            <p>Rekammedis</p>
                         </a>
                     </li>
                 </ul>

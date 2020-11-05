@@ -30,44 +30,26 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="http://www.creative-tim.com" class="simple-text">
-                        Admin
+                        Dokter
                     </a>
                 </div>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/admin/dashboard') }}">
+                        <a class="nav-link" href="{{ url('/dokter/dashboard') }}">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ url('/admin/dokter') }}">
+                        <a class="nav-link" href="{{ url('/dokter/rekammedis') }}">
                             <i class="nc-icon nc-circle-09"></i>
-                            <p>Dokter</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/admin/pasien') }}">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Pasien</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/admin/poli') }}">
-                            <i class="nc-icon nc-tag-content"></i>
-                            <p>Poli</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/admin/pendaftaran') }}">
-                            <i class="nc-icon nc-paper-2"></i>
-                            <p>Pendaftaran</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/admin/rekammedis') }}">
-                            <i class="nc-icon nc-single-copy-04"></i>
                             <p>Rekammedis</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ url('/dokter/resep') }}">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Resep</p>
                         </a>
                     </li>
                 </ul>

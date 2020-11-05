@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardDokter;
 use App\Http\Controllers\Dokter;
+use App\Http\Controllers\DokterDashboard;
 use App\Http\Controllers\Pasien;
 use App\Http\Controllers\Pendaftaran;
 use App\Http\Controllers\Poli;
@@ -38,3 +40,5 @@ Route::get('/admin/pendaftaran/{pendaftaran}', [Pendaftaran::class, 'edit']);
 
 Route::get('/admin/rekammedis', [Rekammedis::class, 'index']);
 Route::get('/admin/rekammedis/{rekammedis}', [Rekammedis::class, 'edit']);
+
+Route::get('/dokter', [DokterDashboard::class, 'index']);

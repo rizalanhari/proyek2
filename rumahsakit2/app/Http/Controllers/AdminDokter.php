@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DokterModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AdminDokter extends Controller
 {
@@ -31,7 +33,13 @@ class AdminDokter extends Controller
     public function create()
     {
         //
-        return view('admin/dokter/create');
+        $value = session('username');
+        $id_user = DB::table('user')->where('username', $value)->pluck('id_user');
+        $spesialis = DB::table('spesialis')->get();
+        $poli = DB::table('poli')->get();
+        Session::flash('id_user', $id_user[0]);
+        // dd($id_user);
+        return view('admin/dokter/create', ['poli' => $poli], ['spesialis' => $spesialis], $id_user);
     }
 
     /**
@@ -43,6 +51,9 @@ class AdminDokter extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        DokterModel::create($request->all());
+        return redirect('admin/dokter');
     }
 
     /**

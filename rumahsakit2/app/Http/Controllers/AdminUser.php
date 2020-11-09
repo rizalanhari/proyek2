@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PoliModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminUser extends Controller
 {
@@ -43,6 +44,7 @@ class AdminUser extends Controller
             'username' => $request->username,
             'password' => $request->password
         ]);
+        Session::flash('username', $request->username);
         return redirect('admin/dokter/create');
     }
 

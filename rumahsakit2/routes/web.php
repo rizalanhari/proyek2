@@ -23,10 +23,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AdminDashboard::class, 'index']);
 
 Route::get('/admin/user/create', [AdminUser::class, 'create']);
-Route::post('/admin/user/create', [AdminUser::class, 'store']);
+Route::post('/admin/user/store', [AdminUser::class, 'store']);
 
 Route::get('/admin/dokter', [AdminDokter::class, 'index']);
 Route::get('/admin/dokter/create', [AdminDokter::class, 'create']);
+Route::post('/admin/dokter/store', [AdminDokter::class, 'store']);
 Route::get('/admin/dokter/{dokter}', [AdminDokter::class, 'edit']);
 
 Route::get('/admin/pasien', [AdminPasien::class, 'index']);

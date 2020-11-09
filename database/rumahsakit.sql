@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2020 at 12:39 PM
+-- Generation Time: Nov 09, 2020 at 12:10 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -110,16 +110,17 @@ CREATE TABLE `pendaftaran` (
   `pasien_id_pasien` int(11) NOT NULL,
   `dokter_id_dokter` int(11) NOT NULL,
   `poli_id_poli` int(11) NOT NULL,
-  `biaya_id_biaya` int(11) DEFAULT NULL
+  `biaya_id_biaya` int(11) DEFAULT NULL,
+  `status_id_status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pendaftaran`
 --
 
-INSERT INTO `pendaftaran` (`id_pendaftaran`, `pasien_id_pasien`, `dokter_id_dokter`, `poli_id_poli`, `biaya_id_biaya`) VALUES
-(1, 1, 1, 3, NULL),
-(2, 2, 2, 1, NULL);
+INSERT INTO `pendaftaran` (`id_pendaftaran`, `pasien_id_pasien`, `dokter_id_dokter`, `poli_id_poli`, `biaya_id_biaya`, `status_id_status`) VALUES
+(3, 1, 2, 4, NULL, 1),
+(4, 2, 1, 3, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -153,8 +154,17 @@ CREATE TABLE `rekammedis` (
   `diagnosa` varchar(45) DEFAULT NULL,
   `keluhan` varchar(45) DEFAULT NULL,
   `tanggal_rekam` datetime DEFAULT NULL,
-  `pasien_id_pasien` int(11) NOT NULL
+  `pasien_id_pasien` int(11) NOT NULL,
+  `dokter_id_dokter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rekammedis`
+--
+
+INSERT INTO `rekammedis` (`id_rekammedis`, `diagnosa`, `keluhan`, `tanggal_rekam`, `pasien_id_pasien`, `dokter_id_dokter`) VALUES
+(1, 'asam lambung naik', 'mual mual', '2020-11-04 18:53:43', 2, 2),
+(2, 'jantung lemah', 'batuk, mudah lemah', '2020-11-04 18:53:43', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,6 +188,25 @@ INSERT INTO `spesialis` (`id_spesialis`, `nama_spesialis`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id_status` int(11) NOT NULL,
+  `nama_status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id_status`, `nama_status`) VALUES
+(1, 'belum'),
+(2, 'selesai');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -196,7 +225,9 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'pasien1', 'pasien1', 1),
 (2, 'pasien2', 'pasien2', 1),
 (3, 'dokter1', 'dokter1', 2),
-(4, 'dokter2', 'dokter2', 2);
+(4, 'dokter2', 'dokter2', 2),
+(9, 'dokter3', 'dokter3', 2),
+(10, 'dokter4', 'dokter4', 2);
 
 --
 -- Indexes for dumped tables
@@ -239,7 +270,8 @@ ALTER TABLE `pendaftaran`
   ADD KEY `fk_pendaftaran_pasien1_idx` (`pasien_id_pasien`),
   ADD KEY `fk_pendaftaran_dokter1_idx` (`dokter_id_dokter`),
   ADD KEY `fk_pendaftaran_poli1_idx` (`poli_id_poli`),
-  ADD KEY `fk_pendaftaran_biaya1_idx` (`biaya_id_biaya`);
+  ADD KEY `fk_pendaftaran_biaya1_idx` (`biaya_id_biaya`),
+  ADD KEY `fk_pendaftaran_status1` (`status_id_status`);
 
 --
 -- Indexes for table `poli`
@@ -252,13 +284,20 @@ ALTER TABLE `poli`
 --
 ALTER TABLE `rekammedis`
   ADD PRIMARY KEY (`id_rekammedis`),
-  ADD KEY `fk_rekammedis_pasien1_idx` (`pasien_id_pasien`);
+  ADD KEY `fk_rekammedis_pasien1_idx` (`pasien_id_pasien`),
+  ADD KEY `fk_rekammedis_dokter1` (`dokter_id_dokter`);
 
 --
 -- Indexes for table `spesialis`
 --
 ALTER TABLE `spesialis`
   ADD PRIMARY KEY (`id_spesialis`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id_status`);
 
 --
 -- Indexes for table `user`
@@ -298,19 +337,19 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `spesialis`
@@ -319,10 +358,16 @@ ALTER TABLE `spesialis`
   MODIFY `id_spesialis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -355,12 +400,14 @@ ALTER TABLE `pendaftaran`
   ADD CONSTRAINT `fk_pendaftaran_biaya1` FOREIGN KEY (`biaya_id_biaya`) REFERENCES `biaya` (`id_biaya`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pendaftaran_dokter1` FOREIGN KEY (`dokter_id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pendaftaran_pasien1` FOREIGN KEY (`pasien_id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_pendaftaran_poli1` FOREIGN KEY (`poli_id_poli`) REFERENCES `poli` (`id_poli`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pendaftaran_poli1` FOREIGN KEY (`poli_id_poli`) REFERENCES `poli` (`id_poli`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pendaftaran_status1` FOREIGN KEY (`status_id_status`) REFERENCES `status` (`id_status`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `rekammedis`
 --
 ALTER TABLE `rekammedis`
+  ADD CONSTRAINT `fk_rekammedis_dokter1` FOREIGN KEY (`dokter_id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_rekammedis_pasien1` FOREIGN KEY (`pasien_id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 

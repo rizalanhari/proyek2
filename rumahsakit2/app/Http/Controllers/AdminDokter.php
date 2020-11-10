@@ -103,9 +103,15 @@ class AdminDokter extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, DokterModel $dokter)
     {
         //
+        dd($request);
+        // protected $fillable = ['nama_depan', 'nama_belakang', 'alamat', 'usia', 'no_telepon', 'tarif', 'spesialis_id_spesialis', 'user_id_user', 'poli_id_poli'];
+        // DokterModel::where('id_dokter', $dokter->id_dokter)
+        //     ->update([
+        //         'nama_depan' => $request->
+        //     ]);
     }
 
     /**

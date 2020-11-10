@@ -17,7 +17,8 @@ use Illuminate\Contracts\Session\Session;
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="POST" action="/admin/dokter/store">
+                    <form method="POST" action="/admin/dokter/update/{{session('dokter.id_dokter')}}">
+                        @method('patch')
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -69,7 +70,7 @@ use Illuminate\Contracts\Session\Session;
                                 </select>
                             </div>
                         </div>
-                        <input type="hidden" class="form-control" id="user_id_user" name="user_id_user" value="">
+                        <input type="hidden" class="form-control" id="user_id_user" name="user_id_user" value="<?= session('dokter.user_id_user') ?>">
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Edit</button>

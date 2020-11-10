@@ -6,7 +6,9 @@ use App\Http\Controllers\AdminPasien;
 use App\Http\Controllers\AdminPendaftaran;
 use App\Http\Controllers\AdminPoli;
 use App\Http\Controllers\AdminRekammedis;
+use App\Http\Controllers\AdminSpesialis;
 use App\Http\Controllers\AdminUser;
+use App\Models\SpesialisModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +41,18 @@ Route::get('/admin/pendaftaran', [AdminPendaftaran::class, 'index']);
 Route::get('/admin/pendaftaran/{pendaftaran}', [AdminPendaftaran::class, 'edit']);
 
 Route::get('/admin/poli', [AdminPoli::class, 'index']);
-Route::get('/admin/poli/{poli}', [AdminPoli::class, 'edit']);
+Route::get('/admin/poli/create', [AdminPoli::class, 'create']);
+Route::post('/admin/poli/store', [AdminPoli::class, 'store']);
+Route::delete('/admin/poli/del/{poli}', [AdminPoli::class, 'destroy']);
+Route::get('/admin/poli/edit/{poli}', [AdminPoli::class, 'edit']);
+Route::patch('/admin/poli/update/{poli}', [AdminPoli::class, 'update']);
+
+Route::get('/admin/spesialis', [AdminSpesialis::class, 'index']);
+Route::get('/admin/spesialis/create', [AdminSpesialis::class, 'create']);
+Route::post('/admin/spesialis/store', [AdminSpesialis::class, 'store']);
+Route::delete('/admin/spesialis/del/{spesialis}', [AdminSpesialis::class, 'destroy']);
+Route::get('/admin/spesialis/edit/{spesialis}', [AdminSpesialis::class, 'edit']);
+Route::patch('/admin/spesialis/update/{spesialis}', [AdminSpesialis::class, 'update']);
 
 Route::get('/admin/rekammedis', [AdminRekammedis::class, 'index']);
 Route::get('/admin/rekammedis/{rekammedis}', [AdminRekammedis::class, 'edit']);

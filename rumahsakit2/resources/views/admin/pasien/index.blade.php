@@ -16,7 +16,6 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Alamat</th>
-                                <th>Action</th>
                             </thead>
                             <tbody>
                                 @foreach ($pasien as $psn)
@@ -24,10 +23,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $psn->nama_depan }} {{ $psn->nama_belakang }}</td>
                                     <td>{{ $psn->alamat }}</td>
-                                    <td>
-                                        <a href="/admin/pasien/{{$psn->id_pasien}}" class="badge badge-success float-right mr-2">Edit</a>
-                                        <a href="" class="badge badge-danger float-right mr-1">Hapus</a>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -36,7 +31,6 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>

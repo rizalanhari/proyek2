@@ -17,7 +17,6 @@
                                 <th>Nama Pasien</th>
                                 <th>Nama Dokter</th>
                                 <th>Diagnosa</th>
-                                <th>Action</th>
                             </thead>
                             <tbody>
                                 @foreach ($rekammedis as $rmd)
@@ -26,10 +25,6 @@
                                     <td>{{ $rmd->pasien_depan }} {{ $rmd->pasien_belakang }}</td>
                                     <td>{{ $rmd->dokter_depan }} {{ $rmd->dokter_belakang }}</td>
                                     <td>{{ $rmd->diagnosa }}</td>
-                                    <td>
-                                        <a href="/admin/rekammedis/{{$rmd->id_rekammedis}}" class="badge badge-success float-right mr-2">Edit</a>
-                                        <a href="" class="badge badge-danger float-right mr-1">Hapus</a>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -38,7 +33,6 @@
                                 <th>Nama Pasien</th>
                                 <th>Nama Dokter</th>
                                 <th>Diagnosa</th>
-                                <th>Action</th>
                             </tfoot>
                         </table>
                     </div>

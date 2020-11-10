@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PoliModel;
+use App\Models\SpesialisModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminPoli extends Controller
+class AdminSpesialis extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AdminPoli extends Controller
     public function index()
     {
         //
-        $poli = DB::table('poli')->get();
-        return view('admin/poli/index', ['poli' => $poli]);
+        $spesialis = DB::table('spesialis')->get();
+        return view('admin/spesialis/index', ['spesialis' => $spesialis]);
     }
 
     /**
@@ -28,7 +28,7 @@ class AdminPoli extends Controller
     public function create()
     {
         //
-        return view('admin/poli/create');
+        return view('admin/spesialis/create');
     }
 
     /**
@@ -40,8 +40,8 @@ class AdminPoli extends Controller
     public function store(Request $request)
     {
         //
-        PoliModel::create($request->all());
-        return redirect('admin/poli')->with('status', 'Data Poli Berhasil Ditambah');
+        SpesialisModel::create($request->all());
+        return redirect('admin/spesialis')->with('status', 'Data Spesialis Berhasil Ditambah');
     }
 
     /**
@@ -61,10 +61,10 @@ class AdminPoli extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PoliModel $poli)
+    public function edit(SpesialisModel $spesialis)
     {
         //
-        return view('admin/poli/edit', ['poli' => $poli]);
+        return view('admin/spesialis/edit', ['spesialis' => $spesialis]);
     }
 
     /**
@@ -74,14 +74,14 @@ class AdminPoli extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PoliModel $poli)
+    public function update(Request $request, SpesialisModel $spesialis)
     {
         //
-        PoliModel::where('id_poli', $poli->id_poli)
+        SpesialisModel::where('id_spesialis', $spesialis->id_spesialis)
             ->update([
-                'nama_poli' => $request->nama_poli,
+                'nama_spesialis' => $request->nama_spesialis,
             ]);
-        return redirect('admin/poli')->with('status', 'Data Poli Berhasil Diedit');
+        return redirect('admin/spesialis')->with('status', 'Data Spesialis Berhasil Diedit');
     }
 
     /**
@@ -90,10 +90,10 @@ class AdminPoli extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PoliModel $poli)
+    public function destroy(SpesialisModel $spesialis)
     {
         //
-        PoliModel::destroy($poli->id_poli);
-        return redirect('admin/poli')->with('status', 'Data Poli Berhasil Dihapus');
+        SpesialisModel::destroy($spesialis->id_spesialis);
+        return redirect('/admin/spesialis')->with('status', 'Data Spesialis Berhasil Dihapus');
     }
 }

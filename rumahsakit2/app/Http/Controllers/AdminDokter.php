@@ -66,6 +66,7 @@ class AdminDokter extends Controller
         ]);
         DokterModel::create($request->all());
         return redirect('admin/dokter')->with('status', 'Data Dokter Berhasil Ditambah');
+        Session::forget('id_user');
     }
 
     /**
@@ -120,6 +121,7 @@ class AdminDokter extends Controller
                 'poli_id_poli' => $request->poli_id_poli
             ]);
         return redirect('admin/dokter')->with('status', 'Data Dokter Berhasil Diedit');
+        Session::forget('dokter');
     }
 
     /**

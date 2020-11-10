@@ -5,6 +5,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">DataTable Poli</h3>
@@ -23,8 +28,12 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $pol->nama_poli }}</td>
                                     <td>
-                                        <a href="/admin/poli/{{$pol->id_poli}}" class="badge badge-success float-right mr-2">Edit</a>
-                                        <a href="" class="badge badge-danger float-right mr-1">Hapus</a>
+                                        <a href="/admin/poli/edit/{{$pol->id_poli}}" class="btn btn-primary">Edit</a>
+                                        <form action="/admin/poli/del/{{$pol->id_poli}}" method="POST" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

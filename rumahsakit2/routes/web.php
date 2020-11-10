@@ -28,7 +28,8 @@ Route::post('/admin/user/store', [AdminUser::class, 'store']);
 Route::get('/admin/dokter', [AdminDokter::class, 'index']);
 Route::get('/admin/dokter/create', [AdminDokter::class, 'create']);
 Route::post('/admin/dokter/store', [AdminDokter::class, 'store']);
-Route::get('/admin/dokter/{dokter}', [AdminDokter::class, 'edit']);
+Route::get('/admin/dokter/edit/{dokter}', [AdminDokter::class, 'edit']);
+Route::delete('/admin/dokter/del/{dokter}', [AdminDokter::class, 'destroy']);
 
 Route::get('/admin/pasien', [AdminPasien::class, 'index']);
 Route::get('/admin/pasien/{pasien}', [AdminPasien::class, 'edit']);

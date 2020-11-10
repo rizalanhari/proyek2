@@ -18,11 +18,17 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Buat Username" name="username">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Buat Username" name="username">
+                                @error('username')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Buat Password" name="password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Buat Password" name="password">
+                                @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.card-body -->

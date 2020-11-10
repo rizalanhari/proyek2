@@ -39,6 +39,10 @@ class AdminUser extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
         UserModel::create([
             'level' => 2,
             'username' => $request->username,

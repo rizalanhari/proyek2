@@ -17,9 +17,9 @@ use Illuminate\Contracts\Session\Session;
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="POST" action="/admin/dokter/update/{{session('dokter.id_dokter')}}">
-                        @method('patch')
-                        @csrf
+                    <form method="POST" action="/admin/dokter/update/{{session('dokter.id_dokter')}}" enctype="multipart/form-data">
+                        @method('PATCH')
+                        {{csrf_field()}}
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nama_depan">Nama Depan</label>

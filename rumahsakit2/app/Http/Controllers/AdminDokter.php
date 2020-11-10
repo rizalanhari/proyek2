@@ -106,12 +106,20 @@ class AdminDokter extends Controller
     public function update(Request $request, DokterModel $dokter)
     {
         //
-        dd($request);
-        // protected $fillable = ['nama_depan', 'nama_belakang', 'alamat', 'usia', 'no_telepon', 'tarif', 'spesialis_id_spesialis', 'user_id_user', 'poli_id_poli'];
-        // DokterModel::where('id_dokter', $dokter->id_dokter)
-        //     ->update([
-        //         'nama_depan' => $request->
-        //     ]);
+        // return $request;
+        DokterModel::where('id_dokter', $dokter->id_dokter)
+            ->update([
+                'nama_depan' => $request->nama_depan,
+                'nama_belakang' => $request->nama_belakang,
+                'alamat' => $request->alamat,
+                'usia' => $request->usia,
+                'no_telepon' => $request->no_telepon,
+                'tarif' => $request->tarif,
+                'spesialis_id_spesialis' => $request->spesialis_id_spesialis,
+                'user_id_user' => $request->user_id_user,
+                'poli_id_poli' => $request->poli_id_poli
+            ]);
+        return redirect('admin/dokter')->with('status', 'Data Dokter Berhasil Diedit');
     }
 
     /**

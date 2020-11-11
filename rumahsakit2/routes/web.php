@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminPoli;
 use App\Http\Controllers\AdminRekammedis;
 use App\Http\Controllers\AdminSpesialis;
 use App\Http\Controllers\AdminUser;
+use App\Http\Controllers\PasienAppointment;
+use App\Http\Controllers\PasienHome;
 use App\Models\SpesialisModel;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Admin
 Route::get('/', [AdminDashboard::class, 'index']);
 
 Route::get('/admin/user/create', [AdminUser::class, 'create']);
@@ -56,3 +59,9 @@ Route::patch('/admin/spesialis/update/{spesialis}', [AdminSpesialis::class, 'upd
 
 Route::get('/admin/rekammedis', [AdminRekammedis::class, 'index']);
 Route::get('/admin/rekammedis/{rekammedis}', [AdminRekammedis::class, 'edit']);
+
+//Pasien
+Route::get('/rumahsakit', [PasienHome::class, 'index']);
+Route::get('/rumahsakit/appointment', [PasienAppointment::class, 'index']);
+Route::get('/pasien/poli/select/{poli}', [PasienAppointment::class, 'selectpoli']);
+Route::post('/pasien/appointment/store', [PasienAppointment::class, 'store']);

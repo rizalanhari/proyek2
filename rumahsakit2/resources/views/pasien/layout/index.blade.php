@@ -53,7 +53,7 @@ http://www.tooplate.com/view/2098-health
                 <div class="col-md-8 col-sm-7 text-align-right">
                     <span class="phone-icon"><i class="fa fa-phone"></i>0812-1793-5796</span>
                     <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                    <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">rizalanhari6@gmail.com</a></span>
+                    <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">jsquad@gmail.com</a></span>
                 </div>
 
             </div>
@@ -101,7 +101,7 @@ http://www.tooplate.com/view/2098-health
 
                         <div class="contact-info">
                             <p><i class="fa fa-phone"></i>0812-1793-5796</p>
-                            <p><i class="fa fa-envelope-o"></i> <a href="#">rizalanhari6@gmail.com</a></p>
+                            <p><i class="fa fa-envelope-o"></i> <a href="#">jsquad@gmail.com</a></p>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminPoli;
 use App\Http\Controllers\AdminRekammedis;
 use App\Http\Controllers\AdminSpesialis;
 use App\Http\Controllers\AdminUser;
+use App\Http\Controllers\DokterPemeriksaan;
 use App\Http\Controllers\PasienAppointment;
 use App\Http\Controllers\PasienHome;
 use App\Models\SpesialisModel;
@@ -65,3 +66,6 @@ Route::get('/rumahsakit', [PasienHome::class, 'index']);
 Route::get('/rumahsakit/appointment', [PasienAppointment::class, 'index']);
 Route::get('/pasien/poli/select/{poli}', [PasienAppointment::class, 'selectpoli']);
 Route::post('/pasien/appointment/store', [PasienAppointment::class, 'store']);
+
+//Dokter
+Route::get('/dokter', [DokterPemeriksaan::class, 'index']);

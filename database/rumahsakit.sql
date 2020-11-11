@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 12:10 PM
+-- Generation Time: Nov 11, 2020 at 01:27 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -59,7 +59,9 @@ CREATE TABLE `dokter` (
 
 INSERT INTO `dokter` (`id_dokter`, `nama_depan`, `nama_belakang`, `alamat`, `usia`, `no_telepon`, `tarif`, `spesialis_id_spesialis`, `user_id_user`, `poli_id_poli`) VALUES
 (1, 'rani', 'susilo', 'surabaya', '30', '081253746354', 150000, 2, 3, 3),
-(2, 'dian', 'sastro', 'bandung', '40', '085464786564', 100000, 1, 4, 1);
+(2, 'dian', 'sastro', 'bandung', '40', '085464786564', 100000, 1, 4, 1),
+(3, 'rizal', 'anhari', 'jombang', '22', '081217935796', 200000, 2, 37, 3),
+(5, 'mul', 'darmawan', 'jakarta', '50', '081357446332', 150000, 1, 39, 2);
 
 -- --------------------------------------------------------
 
@@ -107,6 +109,7 @@ INSERT INTO `pasien` (`id_pasien`, `nama_depan`, `nama_belakang`, `alamat`, `usi
 
 CREATE TABLE `pendaftaran` (
   `id_pendaftaran` int(11) NOT NULL,
+  `tanggal_pendaftaran` date NOT NULL,
   `pasien_id_pasien` int(11) NOT NULL,
   `dokter_id_dokter` int(11) NOT NULL,
   `poli_id_poli` int(11) NOT NULL,
@@ -118,9 +121,11 @@ CREATE TABLE `pendaftaran` (
 -- Dumping data for table `pendaftaran`
 --
 
-INSERT INTO `pendaftaran` (`id_pendaftaran`, `pasien_id_pasien`, `dokter_id_dokter`, `poli_id_poli`, `biaya_id_biaya`, `status_id_status`) VALUES
-(3, 1, 2, 4, NULL, 1),
-(4, 2, 1, 3, NULL, 1);
+INSERT INTO `pendaftaran` (`id_pendaftaran`, `tanggal_pendaftaran`, `pasien_id_pasien`, `dokter_id_dokter`, `poli_id_poli`, `biaya_id_biaya`, `status_id_status`) VALUES
+(3, '2020-11-11', 1, 2, 4, NULL, 1),
+(4, '2020-11-12', 2, 1, 3, NULL, 1),
+(5, '2020-11-12', 1, 2, 1, NULL, 1),
+(6, '2020-11-15', 1, 5, 2, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -141,7 +146,10 @@ INSERT INTO `poli` (`id_poli`, `nama_poli`) VALUES
 (1, 'anak'),
 (2, 'vaksinasi'),
 (3, 'penyakit dalam'),
-(4, 'gigi');
+(4, 'gigi'),
+(7, 'telinga hidung tenggorokan'),
+(8, 'kandungan dan kebidanan'),
+(9, 'umum');
 
 -- --------------------------------------------------------
 
@@ -183,7 +191,9 @@ CREATE TABLE `spesialis` (
 
 INSERT INTO `spesialis` (`id_spesialis`, `nama_spesialis`) VALUES
 (1, 'paru'),
-(2, 'jantung');
+(2, 'jantung'),
+(3, 'bedah'),
+(13, 'mata');
 
 -- --------------------------------------------------------
 
@@ -226,8 +236,9 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
 (2, 'pasien2', 'pasien2', 1),
 (3, 'dokter1', 'dokter1', 2),
 (4, 'dokter2', 'dokter2', 2),
-(9, 'dokter3', 'dokter3', 2),
-(10, 'dokter4', 'dokter4', 2);
+(37, 'dzanha', 'dzanha', 2),
+(39, 'dokter3', 'dokter3', 2),
+(53, 'admin', 'admin', 3);
 
 --
 -- Indexes for dumped tables
@@ -303,7 +314,8 @@ ALTER TABLE `status`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -319,7 +331,7 @@ ALTER TABLE `biaya`
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kasir`
@@ -337,13 +349,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `rekammedis`
@@ -355,7 +367,7 @@ ALTER TABLE `rekammedis`
 -- AUTO_INCREMENT for table `spesialis`
 --
 ALTER TABLE `spesialis`
-  MODIFY `id_spesialis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_spesialis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -367,7 +379,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables

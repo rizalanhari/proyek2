@@ -1,5 +1,5 @@
 @extends('dokter/layout/index')
-@section('title','Table Dokter')
+@section('title','Table Pemeriksaan')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -15,18 +15,21 @@
                             <thead>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Spesialis</th>
-                                <th>Action</th>
                             </thead>
                             <tbody>
-
+                                @foreach($pendaftaran as $pnr)
+                                @if($pnr->status_id_status==1)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pnr->nama_depan }} {{ $pnr->nama_belakang }}</td>
+                                </tr>
+                                @endif
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Spesialis</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -52,22 +55,25 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example3" class="table table-bordered table-striped">
                             <thead>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Spesialis</th>
-                                <th>Action</th>
                             </thead>
                             <tbody>
-
+                                @foreach($pendaftaran as $pnr)
+                                @if($pnr->status_id_status==2)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pnr->nama_depan }} {{ $pnr->nama_belakang }}</td>
+                                </tr>
+                                @endif
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Spesialis</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -93,21 +99,31 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example4" class="table table-bordered table-striped">
                             <thead>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Spesialis</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
-
+                                @foreach($pendaftaran as $pnr)
+                                @if($pnr->status_id_status==1)
+                                @if($pnr->tanggal_pendaftaran==$date)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pnr->nama_depan }} {{ $pnr->nama_belakang }}</td>
+                                    <td>
+                                        <a href="/dokter/periksa/{{ $pnr->id_pendaftaran}}" class="btn btn-primary">Periksa</a>
+                                    </td>
+                                </tr>
+                                @endif
+                                @endif
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Spesialis</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -123,8 +139,5 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-
-
-
 <!-- /.content -->
 @endsection

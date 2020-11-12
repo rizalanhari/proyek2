@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class DokterPemeriksaan extends Controller
 {
@@ -16,9 +17,17 @@ class DokterPemeriksaan extends Controller
     public function index()
     {
         //
-        Session::put('id_dokter',);
-        $pendaftaran = DB::table('pendaftaran')->get();
-        return view('dokter/pemeriksaan/index');
+        $date = Carbon::now();
+        $idate = $date->format('Y-m-d');
+        Session::put('id_dokter', 1);
+        $pendaftaran = DB::table('pendaftaran')
+            ->join('pasien', 'pasien.id_pasien', '=', 'pendaftaran.pasien_id_pasien')
+            ->select('pendaftaran.*', 'pasien.nama_depan', 'pasien.nama_belakang')
+            ->where('pendaftaran.dokter_id_dokter', '=', session('id_dokter'))
+            // ->where('pendaftaran.status_id_status', '=', 1)
+            ->get();
+        // dd($date->format('Y-m-d'), $pendaftaran);
+        return view('dokter/pemeriksaan/index', ['pendaftaran' => $pendaftaran], ['date' => $idate]);
     }
 
     /**

@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-sm-6">
                             <label for="name">Name</label>
                             @foreach($pasien as $psn)
-                            <input type="text" class="form-control" id="name" value="{{ $psn->nama_depan }} {{ $psn->nama_belakang }}">
+                            <input type="text" class="form-control" id="name" value="{{ $psn->nama_depan }} {{ $psn->nama_belakang }}" disabled>
                             @endforeach
                         </div>
 

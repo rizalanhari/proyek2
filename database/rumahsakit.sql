@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2020 at 01:27 PM
+-- Generation Time: Nov 18, 2020 at 04:41 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -61,7 +61,8 @@ INSERT INTO `dokter` (`id_dokter`, `nama_depan`, `nama_belakang`, `alamat`, `usi
 (1, 'rani', 'susilo', 'surabaya', '30', '081253746354', 150000, 2, 3, 3),
 (2, 'dian', 'sastro', 'bandung', '40', '085464786564', 100000, 1, 4, 1),
 (3, 'rizal', 'anhari', 'jombang', '22', '081217935796', 200000, 2, 37, 3),
-(5, 'mul', 'darmawan', 'jakarta', '50', '081357446332', 150000, 1, 39, 2);
+(5, 'mul', 'darmawan', 'jakarta', '50', '081357446332', 150000, 1, 39, 2),
+(9, 'Irgy', 'Pratama', 'Pacet', '25', '0816233234', 100000, 3, 55, 3);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,15 @@ INSERT INTO `pendaftaran` (`id_pendaftaran`, `tanggal_pendaftaran`, `pasien_id_p
 (3, '2020-11-11', 1, 2, 4, NULL, 1),
 (4, '2020-11-12', 2, 1, 3, NULL, 1),
 (5, '2020-11-12', 1, 2, 1, NULL, 1),
-(6, '2020-11-15', 1, 5, 2, NULL, 1);
+(6, '2020-11-15', 1, 5, 2, NULL, 1),
+(7, '2020-11-13', 1, 5, 2, NULL, 1),
+(8, '2020-12-04', 1, 5, 2, NULL, 1),
+(9, '2020-11-13', 1, 1, 3, NULL, 1),
+(10, '2020-11-09', 1, 1, 3, NULL, 2),
+(11, '2020-11-17', 1, 1, 3, NULL, 2),
+(12, '2020-11-17', 1, 1, 3, NULL, 2),
+(13, '2020-11-17', 1, 1, 3, NULL, 2),
+(14, '2020-11-18', 2, 1, 3, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +181,31 @@ CREATE TABLE `rekammedis` (
 
 INSERT INTO `rekammedis` (`id_rekammedis`, `diagnosa`, `keluhan`, `tanggal_rekam`, `pasien_id_pasien`, `dokter_id_dokter`) VALUES
 (1, 'asam lambung naik', 'mual mual', '2020-11-04 18:53:43', 2, 2),
-(2, 'jantung lemah', 'batuk, mudah lemah', '2020-11-04 18:53:43', 1, 1);
+(2, 'jantung lemah', 'batuk, mudah lemah', '2020-11-04 18:53:43', 1, 1),
+(3, 'mag', 'perut sakit', '2020-11-17 00:00:00', 1, 1),
+(4, 'gagal ginjal', 'sering mutah', '2020-11-17 00:00:00', 1, 1),
+(5, 'mag', 'mual', '2020-11-17 00:00:00', 1, 1),
+(6, 'mag', 'mual', '2020-11-17 00:00:00', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resep`
+--
+
+CREATE TABLE `resep` (
+  `id_resep` int(11) NOT NULL,
+  `pendaftaran_id_pendaftaran` int(11) NOT NULL,
+  `resep` text NOT NULL,
+  `tanggal_resep` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep`
+--
+
+INSERT INTO `resep` (`id_resep`, `pendaftaran_id_pendaftaran`, `resep`, `tanggal_resep`) VALUES
+(1, 13, 'promag\r\ndiapet', '2020-11-17');
 
 -- --------------------------------------------------------
 
@@ -238,7 +271,8 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
 (4, 'dokter2', 'dokter2', 2),
 (37, 'dzanha', 'dzanha', 2),
 (39, 'dokter3', 'dokter3', 2),
-(53, 'admin', 'admin', 3);
+(53, 'admin', 'admin', 3),
+(55, 'dokter10', 'dokter10', 2);
 
 --
 -- Indexes for dumped tables
@@ -299,6 +333,13 @@ ALTER TABLE `rekammedis`
   ADD KEY `fk_rekammedis_dokter1` (`dokter_id_dokter`);
 
 --
+-- Indexes for table `resep`
+--
+ALTER TABLE `resep`
+  ADD PRIMARY KEY (`id_resep`),
+  ADD KEY `fk_resep_pendaftaran1` (`pendaftaran_id_pendaftaran`);
+
+--
 -- Indexes for table `spesialis`
 --
 ALTER TABLE `spesialis`
@@ -331,7 +372,7 @@ ALTER TABLE `biaya`
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kasir`
@@ -349,7 +390,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `poli`
@@ -361,7 +402,13 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT for table `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `resep`
+--
+ALTER TABLE `resep`
+  MODIFY `id_resep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `spesialis`
@@ -379,7 +426,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables
@@ -421,6 +468,12 @@ ALTER TABLE `pendaftaran`
 ALTER TABLE `rekammedis`
   ADD CONSTRAINT `fk_rekammedis_dokter1` FOREIGN KEY (`dokter_id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_rekammedis_pasien1` FOREIGN KEY (`pasien_id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `resep`
+--
+ALTER TABLE `resep`
+  ADD CONSTRAINT `fk_resep_pendaftaran1` FOREIGN KEY (`pendaftaran_id_pendaftaran`) REFERENCES `pendaftaran` (`id_pendaftaran`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

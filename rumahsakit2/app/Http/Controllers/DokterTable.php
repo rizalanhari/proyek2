@@ -7,18 +7,40 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
-class PasienHome extends Controller
+class DokterTable extends Controller
 {
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if (Session::get('level') == NULL || Session::get('level') != 1) {
+            if (Session::get('level') == NULL || Session::get('level') != 2) {
                 return Redirect::to('/login');
             } else {
                 return $next($request);
             }
         });
     }
+    public function showresep()
+    {
+        //
+        $resep = DB::table('resep')
+            ->join('pendaftaran', 'resep.pendaftaran_id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
+            ->join('pasien', 'pendaftaran.pasien_id_pasien', '=', 'pasien.id_pasien')
+            ->select('resep.*', 'pendaftaran.dokter_id_dokter', 'pasien.nama_depan', 'pasien.nama_belakang')
+            ->where('pendaftaran.dokter_id_dokter', session('id_dokter'))
+            ->get();
+        return view('dokter/resep/index', ['resep' => $resep]);
+    }
+    public function showrekammedis()
+    {
+        //
+        $rekammedis = DB::table('rekammedis')
+            ->join('pasien', 'rekammedis.pasien_id_pasien', '=', 'pasien.id_pasien')
+            ->select('rekammedis.*', 'pasien.nama_depan', 'pasien.nama_belakang')
+            ->where('rekammedis.dokter_id_dokter', session('id_dokter'))
+            ->get();
+        return view('dokter/rekammedis/index', ['rekammedis' => $rekammedis]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,20 +49,6 @@ class PasienHome extends Controller
     public function index()
     {
         //
-        $doktertop3 = DB::table('dokter')->take(3)->get();
-        $spesialis = DB::table('spesialis')->get();
-        return view('pasien/home/index', ['doktertop3' => $doktertop3], ['spesialis' => $spesialis]);
-    }
-
-    public function showresep()
-    {
-        //
-        $resep = DB::table('resep')
-            ->join('pendaftaran', 'resep.pendaftaran_id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
-            ->select('resep.*', 'pendaftaran.pasien_id_pasien')
-            ->where('pendaftaran.pasien_id_pasien', session('id_pasien'))
-            ->get();
-        return view('pasien/resep/index', ['resep' => $resep]);
     }
 
     /**

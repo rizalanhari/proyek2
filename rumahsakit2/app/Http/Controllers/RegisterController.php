@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasienModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 
-class PasienHome extends Controller
+class RegisterController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if (Session::get('level') == NULL || Session::get('level') != 1) {
-                return Redirect::to('/login');
-            } else {
-                return $next($request);
-            }
-        });
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,20 +17,7 @@ class PasienHome extends Controller
     public function index()
     {
         //
-        $doktertop3 = DB::table('dokter')->take(3)->get();
-        $spesialis = DB::table('spesialis')->get();
-        return view('pasien/home/index', ['doktertop3' => $doktertop3], ['spesialis' => $spesialis]);
-    }
-
-    public function showresep()
-    {
-        //
-        $resep = DB::table('resep')
-            ->join('pendaftaran', 'resep.pendaftaran_id_pendaftaran', '=', 'pendaftaran.id_pendaftaran')
-            ->select('resep.*', 'pendaftaran.pasien_id_pasien')
-            ->where('pendaftaran.pasien_id_pasien', session('id_pasien'))
-            ->get();
-        return view('pasien/resep/index', ['resep' => $resep]);
+        return view('login/register');
     }
 
     /**
@@ -62,6 +39,26 @@ class PasienHome extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        UserModel::create([
+            'level' => 1,
+            'username' => $request->username,
+            'password' => $request->password
+        ]);
+        $user = DB::table('user')
+            ->where('username', $request->username)
+            ->get();
+        $id_user = $user[0]->id_user;
+        PasienModel::create([
+            'nama_depan' => $request->nama_depan,
+            'nama_belakang' => $request->nama_belakang,
+            'alamat' => $request->alamat,
+            'usia' => $request->usia,
+            'no_telepon' => $request->no_telepon,
+            'user_id_user' => $id_user,
+        ]);
+
+        return redirect('/login');
     }
 
     /**

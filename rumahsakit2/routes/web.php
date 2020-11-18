@@ -9,9 +9,11 @@ use App\Http\Controllers\AdminRekammedis;
 use App\Http\Controllers\AdminSpesialis;
 use App\Http\Controllers\AdminUser;
 use App\Http\Controllers\DokterPemeriksaan;
+use App\Http\Controllers\DokterTable;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasienAppointment;
 use App\Http\Controllers\PasienHome;
+use App\Http\Controllers\RegisterController;
 use App\Models\SpesialisModel;
 use Illuminate\Support\Facades\Route;
 
@@ -67,17 +69,20 @@ Route::get('/rumahsakit', [PasienHome::class, 'index']);
 Route::get('/rumahsakit/appointment', [PasienAppointment::class, 'index']);
 Route::get('/pasien/poli/select/{poli}', [PasienAppointment::class, 'selectpoli']);
 Route::post('/pasien/appointment/store', [PasienAppointment::class, 'store']);
+Route::get('/pasien/resep', [PasienHome::class, 'showresep']);
 
 //Dokter
 Route::get('/dokter', [DokterPemeriksaan::class, 'index']);
 Route::get('/dokter/periksa/{pendaftaran}', [DokterPemeriksaan::class, 'show']);
 Route::post('/dokter/rekammedis/store', [DokterPemeriksaan::class, 'store']);
+Route::get('/dokter/resep', [DokterTable::class, 'showresep']);
+Route::get('/dokter/rekammedis', [DokterTable::class, 'showrekammedis']);
 
 //login
-Route::get('/login', function () {
-    return view('login/index');
-});
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
 Route::post('login/postlogin', [LoginController::class, 'postlogin']);
+Route::post('register/store', [RegisterController::class, 'store']);
 
 //Logout
 Route::get('logout', [LoginController::class, 'postlogout']);

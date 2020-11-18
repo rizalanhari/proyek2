@@ -1,4 +1,4 @@
-@extends('admin/layout/index')
+@extends('dokter/layout/index')
 @section('title','Table Resep')
 @section('content')
 <section class="content">
@@ -14,30 +14,26 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Action</th>
+                                <th>Nama Pasien</th>
+                                <th>Tanggal</th>
+                                <th>Resep</th>
                             </thead>
                             <tbody>
-                                @foreach ($spesialis as $spl)
+                                @foreach ($resep as $rsp)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $spl->nama_spesialis }}</td>
-                                    <td>
-                                        <a href="/admin/spesialis/edit/{{$spl->id_spesialis}}" class="btn btn-primary">Edit</a>
-                                        <form action="/admin/spesialis/del/{{$spl->id_spesialis}}" method="POST" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
+                                    <td>{{ $rsp->nama_depan }} {{ $rsp->nama_belakang }}</td>
+                                    <td>{{ $rsp->tanggal_resep }}</td>
+                                    <td>{{ $rsp->resep }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Action</th>
+                                    <th>Nama Pasien</th>
+                                    <th>Tanggal</th>
+                                    <th>Resep</th>
                                 </tr>
                             </tfoot>
                         </table>

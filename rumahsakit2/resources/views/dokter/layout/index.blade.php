@@ -76,7 +76,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Pemeriksaan Pasien
-                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                         </li>
@@ -104,6 +103,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ url('/logout') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
                         </li>
                     </ul>
                 </nav>

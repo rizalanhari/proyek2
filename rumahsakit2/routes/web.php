@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminRekammedis;
 use App\Http\Controllers\AdminSpesialis;
 use App\Http\Controllers\AdminUser;
 use App\Http\Controllers\DokterPemeriksaan;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasienAppointment;
 use App\Http\Controllers\PasienHome;
 use App\Models\SpesialisModel;
@@ -69,3 +70,14 @@ Route::post('/pasien/appointment/store', [PasienAppointment::class, 'store']);
 
 //Dokter
 Route::get('/dokter', [DokterPemeriksaan::class, 'index']);
+Route::get('/dokter/periksa/{pendaftaran}', [DokterPemeriksaan::class, 'show']);
+Route::post('/dokter/rekammedis/store', [DokterPemeriksaan::class, 'store']);
+
+//login
+Route::get('/login', function () {
+    return view('login/index');
+});
+Route::post('login/postlogin', [LoginController::class, 'postlogin']);
+
+//Logout
+Route::get('logout', [LoginController::class, 'postlogout']);

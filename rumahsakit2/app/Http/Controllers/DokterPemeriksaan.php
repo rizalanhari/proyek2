@@ -2,13 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PendaftaranModel;
+use App\Models\RekammedisModel;
+use App\Models\ResepModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class DokterPemeriksaan extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Session::get('level') == NULL || Session::get('level') != 2) {
+                return Redirect::to('/login');
+            } else {
+                return $next($request);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +33,6 @@ class DokterPemeriksaan extends Controller
         //
         $date = Carbon::now();
         $idate = $date->format('Y-m-d');
-        Session::put('id_dokter', 1);
         $pendaftaran = DB::table('pendaftaran')
             ->join('pasien', 'pasien.id_pasien', '=', 'pendaftaran.pasien_id_pasien')
             ->select('pendaftaran.*', 'pasien.nama_depan', 'pasien.nama_belakang')
@@ -48,7 +61,28 @@ class DokterPemeriksaan extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         //
+        $date = Carbon::now();
+        $idate = $date->format('Y-m-d');
+        PendaftaranModel::where('id_pendaftaran', $request->id_pendaftaran)
+            ->update([
+                'status_id_status' => 2,
+            ]);
+        // $pendaftaran = DB::table('pendaftaran')->where('id_pendaftaran', $request->id_pendaftaran)->get();
+        RekammedisModel::create([
+            'keluhan' => $request->keluhan,
+            'diagnosa' => $request->diagnosa,
+            'pasien_id_pasien' => $request->pasien_id_pasien,
+            'dokter_id_dokter' => $request->dokter_id_dokter,
+            'tanggal_rekam' => $idate
+        ]);
+        ResepModel::create([
+            'pendaftaran_id_pendaftaran' => $request->id_pendaftaran,
+            'resep' => $request->resep,
+            'tanggal_resep' => $idate
+        ]);
+        return redirect('dokter')->with('status', 'Data Rekammedis Berhasil Ditambah');
     }
 
     /**
@@ -57,9 +91,13 @@ class DokterPemeriksaan extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PendaftaranModel $pendaftaran)
     {
         //
+        $pasien = DB::table('pasien')->where('id_pasien', $pendaftaran->pasien_id_pasien)->get();
+        $pendaftaran2 = DB::table('pendaftaran')->where('id_pendaftaran', $pendaftaran->id_pendaftaran)->get();
+        // dd($pendaftaran, $pasien);
+        return view('dokter/pemeriksaan/rekammedis', ['pendaftaran' => $pendaftaran2], ['pasien' => $pasien]);
     }
 
     /**

@@ -6,10 +6,21 @@ use App\Models\PendaftaranModel;
 use App\Models\PoliModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class PasienAppointment extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Session::get('level') == NULL || Session::get('level') != 1) {
+                return Redirect::to('/login');
+            } else {
+                return $next($request);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *

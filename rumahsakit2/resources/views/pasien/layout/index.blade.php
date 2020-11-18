@@ -82,6 +82,7 @@ http://www.tooplate.com/view/2098-health
                     <li><a href="#team" class="smoothScroll">Doctors</a></li>
                     <li><a href="#google-map" class="smoothScroll">Contact</a></li>
                     <li class="appointment-btn"><a href="/rumahsakit/appointment">Make an appointment</a></li>
+                    <li><a href="{{ url('/logout') }}" class="smoothScroll">Logout</a></li>
                 </ul>
             </div>
 

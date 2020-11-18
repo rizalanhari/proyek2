@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class PasienHome extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Session::get('level') == NULL || Session::get('level') != 1) {
+                return Redirect::to('/login');
+            } else {
+                return $next($request);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,6 @@ class PasienHome extends Controller
     public function index()
     {
         //
-        Session::put('id_pasien', 1);
         $doktertop3 = DB::table('dokter')->take(3)->get();
         $spesialis = DB::table('spesialis')->get();
         return view('pasien/home/index', ['doktertop3' => $doktertop3], ['spesialis' => $spesialis]);
